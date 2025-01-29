@@ -9,10 +9,16 @@ body {
 
 .nav-link {
   text-decoration: none !important;
+  color: black; /* Default text color */
+  transition: color 0.3s ease-in-out; /* Smooth transition */
 }
-a.nav-link.dropdown-toggle:hover{
-  color: darkorange;
+
+/* Change color to orange on hover */
+.nav-link:hover,
+.nav-link.dropdown-toggle:hover {
+  color: darkorange !important;
 }
+
 .text-orange {
   color: darkorange !important;
 }
