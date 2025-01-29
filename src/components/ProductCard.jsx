@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../context/CartContext"; 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductCard = ({ product }) => {
+  const { addToCart } = useContext(CartContext);
+
+  const handleAddToCart = () => {
+    addToCart(product); 
+    toast.success(`${product.name} has been added to your cart!`, {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   return (
     <div className="position-relative text-center shadow-sm bg-white bg-opacity-25 p-4 d-flex flex-column justify-content-between align-items-center rounded-3">
       <a
@@ -26,8 +44,13 @@ const ProductCard = ({ product }) => {
         </p>
       </a>
       <div className="d-flex justify-content-center gap-2 mt-2 w-100">
-        <button className="btn btn-orange px-1 text-white text-nowrap btn-sm">Buy Now</button>
-        <button className="btn btn-outline-orange px-1 text-orange text-nowrap btn-sm">Add to Cart</button>
+        <button className="btn btn-orange px-1 text-sm text-white text-nowrap btn-sm">Buy Now</button>
+        <button
+          onClick={handleAddToCart}
+          className="btn btn-outline-orange px-1 text-orange text-nowrap btn-sm"
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   );

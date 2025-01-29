@@ -21,11 +21,11 @@ body {
   border-color: darkorange !important;
 }
 
-.btn.btn-orange:hover {
+/* .btn.btn-orange:hover {
   background-color: white !important;
   color: darkorange !important;
   border-color: darkorange !important;
-}
+} */
 .btn-outline-orange {
   background-color: transparent !important;
   border:1px solid darkorange !important;
@@ -78,7 +78,6 @@ body {
 
 
 
-
 @media (min-width: 992px) {
   .nav-item.dropdown:hover .dropdown-menu {
     display: block;
@@ -86,6 +85,7 @@ body {
   .nav-item.dropdown:hover .nav-link {
     color: darkorange; 
   }
+  
 }
 
 @media (max-width: 992px) {

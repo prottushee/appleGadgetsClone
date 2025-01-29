@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
+import { CartContext } from "../context/CartContext";
 import { menuItems } from "../Data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,6 +17,9 @@ const NavigationBar = () => {
   );
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [expandedSubMenu, setExpandedSubMenu] = useState(null);
+  const { getTotalItemCount } = useContext(CartContext);
+  const totalItems = getTotalItemCount();
+
   const handleMouseEnter = (e, index) => {
     if (window.innerWidth > 992) {
       const newState = [...dropdownStates];
@@ -147,7 +151,7 @@ const NavigationBar = () => {
                   </div>
                   <div>
                     <Link
-                      to="../pages/Cart.jsx"
+                      to="/cart"
                       className="nav-link d-flex align-items-center text-white"
                     >
                       <img
@@ -157,9 +161,11 @@ const NavigationBar = () => {
                         height="27"
                       />
                       <p className="mb-0 mx-2">
-                        Cart()
+                        Cart ({totalItems})
                         <br />
-                        <small>Add items</small>
+                        <small>
+                          {totalItems > 0 ? "View Cart" : "Add items"}
+                        </small>
                       </p>
                     </Link>
                   </div>
@@ -263,7 +269,7 @@ const NavigationBar = () => {
             </ul>
           </div>
         </div>
-{/* Category navbar */}
+        {/* Category navbar */}
         <nav className="navbar navbar-expand-lg bg-white shadow-sm py-0">
           <div className="container">
             <div className="collapse navbar-collapse">
@@ -332,9 +338,9 @@ const NavigationBar = () => {
                   width="27"
                   height="27"
                 />
-                <p className="mt-2 mb-1" style={{ fontSize: "smaller" }}>
-                  Cart
-                </p>
+               <p className="mb-0 mx-2">
+                        Cart ({totalItems})
+                      </p>
               </Link>
             </div>
             <div className="col-3 text-center">

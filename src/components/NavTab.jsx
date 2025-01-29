@@ -13,7 +13,7 @@ const NavTab = () => {
       {/* Navigation Links */}
       <div className="row">
         <div className="col-12">
-          <ul className="nav nav-tabs justify-content-center" id="productTabs" role="tablist">
+          <ul className="nav nav-tabs justify-content-left" id="productTabs" role="tablist">
             <li className="nav-item" role="presentation">
               <button
                 className="nav-link text-orange"
@@ -46,7 +46,7 @@ const NavTab = () => {
 
       {/* Tab Content */}
       <div className="row mt-4">
-        <div className="col-12">
+        <div className="col-12 col-lg-6">
           <div id="specification" className="mb-5">
             <h2>Specification</h2>
             <table className="table table-bordered">
@@ -78,7 +78,7 @@ const NavTab = () => {
           <div id="description" className="mb-5">
             <h2>Description</h2>
             <img
-              className="col-12 col-lg-6 img-fluid rounded"
+              className="img-fluid rounded"
               src="/images/description.jpg"
               alt="Description"
             />
@@ -117,8 +117,7 @@ const NavTab = () => {
 
           <div id="video" className="mb-5">
             <h2>Video</h2>
-            <div className="row">
-  <div className="col-12 col-lg-6 ms-0">
+           
     <div className="ratio ratio-16x9">
       <iframe
         src="https://www.youtube.com/embed/9C3qEpKrnWQ"
@@ -126,14 +125,14 @@ const NavTab = () => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
       ></iframe>
-    </div>
+
   </div>
 </div>
 
           </div>
         </div>
       </div>
-    </div>
+
   );
 };
 
