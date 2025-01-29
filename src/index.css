@@ -10,7 +10,9 @@ body {
 .nav-link {
   text-decoration: none !important;
 }
-
+a.nav-link.dropdown-toggle:hover{
+  color: darkorange;
+}
 .text-orange {
   color: darkorange !important;
 }
@@ -26,6 +28,10 @@ body {
   color: darkorange !important;
   border-color: darkorange !important;
 } */
+
+a.hover:hover{
+  color: darkorange !important;
+}
 .btn-outline-orange {
   background-color: transparent !important;
   border:1px solid darkorange !important;
@@ -58,7 +64,6 @@ body {
   text-decoration: none;
 }
 
-
 .category-image {
   filter: grayscale(100%);
 }
@@ -85,7 +90,6 @@ body {
   .nav-item.dropdown:hover .nav-link {
     color: darkorange; 
   }
-  
 }
 
 @media (max-width: 992px) {

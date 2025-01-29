@@ -31,23 +31,26 @@ const ProductCard = ({ product }) => {
           decoding="async"
           src={product.image}
           className="img-fluid rounded"
-          style={{ maxWidth: "200px", maxHeight: "200px" }}
+          style={{ maxWidth: "180px", maxHeight: "180px" }}
         />
-        <p className="d-block fw-semibold text-sm mt-1 px-1 text-nowrap">
+        <p className="d-block fw-semibold text-sm mt-1 px-1 text-nowrap" style={{fontSize: "18px"}}>
           {product.name}
         </p>
-        <p className="d-block fw-semibold text-muted mt-1">
+        <a className="hover d-block text-decoration-none fw-semibold text-muted mt-1" style={{fontSize: "15px"}}>
           {product.price}৳
           {product.originalPrice && (
-            <del className="ms-2 text-secondary">{product.originalPrice}৳</del>
+            <del className="ms-2 text-secondary" style={{fontSize: "12px"}}>{product.originalPrice}৳</del>
           )}
-        </p>
+        </a>
       </a>
       <div className="d-flex justify-content-center gap-2 mt-2 w-100">
-        <button className="btn btn-orange px-1 text-sm text-white text-nowrap btn-sm">Buy Now</button>
+        <button className="btn btn-orange btn-sm px-1 text-white text-nowrap "
+                style={{fontSize: "10px"}}
+        >Buy Now</button>
         <button
           onClick={handleAddToCart}
-          className="btn btn-outline-orange px-1 text-orange text-nowrap btn-sm"
+          className="btn btn-outline-orange btn-sm px-1 text-orange text-nowrap"
+          style={{fontSize: "10px"}}
         >
           Add to Cart
         </button>

@@ -57,7 +57,7 @@ const ShoppingCart = () => {
         
           <div className="table-responsive">
             <table className="table table-bordered border-white">
-              <thead className="table-secondary text-center">
+              <thead className="table-secondary text-start" style={{fontSize: "90%"}}>
                 <tr>
                   <th>Image</th>
                   <th>Product Name</th>
@@ -67,30 +67,30 @@ const ShoppingCart = () => {
                   <th className="d-none d-md-table-cell">Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="text-start" style={{fontSize: "85%"}}>
                 {cart.map((item) => (
-                  <tr key={item.id} className="text-center">
+                  <tr key={item.id} className="text-start align-middle">
                     <td>
                       <img
                         src={item.image}
                         alt={item.name}
                         className="img-fluid rounded"
-                        style={{ maxWidth: "80px" }}
+                        style={{ maxWidth: "50px" }}
                       />
                     </td>
-                    <td className="text-left">{item.name}</td>
+                    <td>{item.name}</td>
                     <td>
                       <div className="btn-group btn-group-sm" role="group">
                         <button
-                          className="btn btn-outline-secondary"
+                          className="btn btn-outline-secondary py-0"
                           onClick={() => handleDecrease(item.id)}
                           disabled={item.quantity === 1}
                         >
                           -
                         </button>
-                        <span className="px-2 py-0">{item.quantity}</span>
+                        <span className="px-2 border border-secondary">{item.quantity}</span>
                         <button
-                          className="btn btn-outline-secondary"
+                          className="btn btn-outline-secondary py-0"
                           onClick={() => handleIncrease(item.id)}
                         >
                           +

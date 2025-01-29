@@ -304,19 +304,23 @@ export const relatedProducts = [
 
  export const colorOptions = [
   {
-    name: "Desert Titanium",
+    name: "Desert Titanium", 
+    hex: "#BFA978",
     image: "/images/iPhone-16-Pro-Max---16-Pro-Desert-Titanium-1929.jpg",
   },
   {
     name: "Black Titanium",
+    hex: "#5c5c5c",
     image: "/images/iPhone-16-Pro-Max---16-Pro-Black-Titanium-2734.webp",
   },
   {
     name: "White Titanium",
+    hex: "#eaeaea",
     image: "/images/iPhone-16-Pro-Max---16-Pro-White-Titanium-5148.jpg",
   },
   {
     name: "Natural Titanium",
+    hex: "#b4b882",
     image: "/images/iPhone-16-Pro-Max---16-Pro-Natural-Titanium-3560.jpg",
   },
 ];

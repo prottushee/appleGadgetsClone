@@ -1,43 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { colorOptions } from "../Data";
 import Container from "./Container";
-import BreadCrumb from "./BreadCrumb"
+import BreadCrumb from "./BreadCrumb";
+import { CartContext } from "../context/CartContext"; 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ViewProduct = () => {
+  const { addToCart } = useContext(CartContext);
+
   const [selectedColor, setSelectedColor] = useState("Desert Titanium");
   const [selectedImage, setSelectedImage] = useState(
     "/images/iPhone-16-Pro-Max---16-Pro-Desert-Titanium-1929.jpg"
   );
   const [quantity, setQuantity] = useState(1);
+  const [isAdded, setIsAdded] = useState(false);
 
+  
   const handleQuantityChange = (action) => {
     setQuantity((prevQuantity) => {
-      if (action === "increase") {
-        return prevQuantity + 1;
-      } else if (action === "decrease" && prevQuantity > 1) {
-        return prevQuantity - 1;
-      }
+      if (action === "increase") return prevQuantity + 1;
+      if (action === "decrease" && prevQuantity > 1) return prevQuantity - 1;
       return prevQuantity;
+    });
+  };
+  const handleAddToCart = () => {
+    if (isAdded) return; 
+
+    const product = {
+      id: "iphone-16-pro-max",
+      name: "iPhone 16 Pro Max",
+      price: 154000,
+      image: selectedImage,
+      color: selectedColor,
+      quantity: quantity,
+    };
+    const productWithQuantity = { ...product, quantity }; 
+    addToCart(productWithQuantity); 
+    setIsAdded(true); 
+
+    toast.success(`${product.name} has been added to your cart!`, {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
     });
   };
 
   return (
     <Container class1="view-product-container">
-      <div className="container" style={{marginTop: "10%"}}>
-        <h3 className="d-block d-lg-none">Iphone 16 Pro Max</h3>
-        <BreadCrumb title="iphone"/>
+      <div className="container" style={{ marginTop: "10%" }}>
+        <h3 className="d-block d-lg-none">iPhone 16 Pro Max</h3>
+        <BreadCrumb title="iPhone 16 Pro Max" />
 
         <div className="row">
-          {/* Product Images Section */}
           <div className="col-md-6">
             <div className="product-gallery">
               <img
                 src={selectedImage}
                 alt={selectedColor}
                 className="img-fluid mb-3 border"
-                style={{ borderRadius: "1.5px", width: "70%" }}
+                style={{ borderRadius: "1.5px", width: "100%" }}
               />
-              <div className="d-flex justify-content-start">
+              <div className="d-flex justify-content-start flex-wrap">
                 {colorOptions.map((color, index) => (
                   <img
                     key={index}
@@ -47,12 +74,11 @@ const ViewProduct = () => {
                       selectedImage === color.image ? "border-orange" : ""
                     }`}
                     style={{
-                      width: "80px",
-                      height: "80px",
+                      width: "70px",
+                      height: "70px",
                       cursor: "pointer",
                       objectFit: "cover",
-                      borderWidth:
-                        selectedImage === color.image ? "0.5px" : "0.25px",
+                      borderWidth: selectedImage === color.image ? "2px" : "1px",
                     }}
                     onClick={() => {
                       setSelectedImage(color.image);
@@ -66,17 +92,13 @@ const ViewProduct = () => {
 
           {/* Product Details Section */}
           <div className="col-md-6">
-            <a href="">
-              <img
-                src="/images/sotoApple-6176.png"
-                alt=""
-                width="12%"
-              />
+            <a href="#">
+              <img src="/images/sotoApple-6176.png" alt="Apple Logo" width="12%" />
             </a>
             <h2 className="d-none d-lg-block">iPhone 16 Pro Max</h2>
             <p className="text-muted">Brand: Apple</p>
-            <h4 className="text-black">Tk.154000</h4>
-            <del>Tk.180000</del>
+            <h4 className="text-black">Tk. 154,000</h4>
+            <del>Tk. 180,000</del>
             <p className="text-danger">14% OFF</p>
 
             <p className="mt-3">
@@ -93,7 +115,7 @@ const ViewProduct = () => {
             {/* Color Selector */}
             <div className="mt-3">
               <h5>Color:</h5>
-              <div className="d-flex">
+              <div className="d-flex flex-wrap">
                 {colorOptions.map((color, index) => (
                   <button
                     key={index}
@@ -102,12 +124,17 @@ const ViewProduct = () => {
                         ? "btn-secondary"
                         : "btn-outline-secondary"
                     }`}
+                    style={{
+                      width: "6%",
+                      height: "8%",
+                      backgroundColor: color.hex,
+                      color: selectedColor === color.name ? "white" : "black",
+                      padding: "5px 10px",
+                    }}
                     onClick={() => {
                       setSelectedImage(color.image);
-                      setSelectedColor(color.name);
                     }}
                   >
-                    {color.name}
                   </button>
                 ))}
               </div>
@@ -118,14 +145,14 @@ const ViewProduct = () => {
               <h5>Quantity:</h5>
               <div className="d-flex align-items-center">
                 <button
-                  className="btn btn-outline-orange"
+                  className="btn btn-outline-orange btn-sm"
                   onClick={() => handleQuantityChange("decrease")}
                 >
                   -
                 </button>
                 <span className="mx-3">{quantity}</span>
                 <button
-                  className="btn btn-outline-orange"
+                  className="btn btn-outline-orange btn-sm"
                   onClick={() => handleQuantityChange("increase")}
                 >
                   +
@@ -134,9 +161,15 @@ const ViewProduct = () => {
             </div>
 
             {/* Add to Cart and Buy Now Buttons */}
-            <div className="mt-4">
-              <button className="text-orange btn btn-outline-orange me-2">
-                Add to Cart
+            <div className="mt-4 d-flex flex-column flex-sm-row">
+              <button
+                className={`btn me-2 mb-2 mb-sm-0 ${
+                  isAdded ? "btn-success text-white" : "btn-outline-orange text-orange"
+                }`}
+                onClick={handleAddToCart}
+                disabled={isAdded} 
+              >
+                {isAdded ? "Added" : "Add to Cart"}
               </button>
               <button className="text-white btn btn-orange">Buy Now</button>
             </div>
