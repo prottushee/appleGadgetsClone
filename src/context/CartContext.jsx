@@ -7,23 +7,23 @@ export const CartContext = createContext();
 const CartProvider = ({ children }) => {
   const [cart, setCart] = useLocalStorage("cart", []);
 
-  // CartContext.js
-const addToCart = (item) => {
-  const existingItem = cart.find((cartItem) => cartItem.id === item.id);
-  if (existingItem) {
-    setCart(
-      cart.map((cartItem) =>
-        cartItem.id === item.id
-          ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
-          : cartItem
-      )
-    );
-  } else {
-    setCart([...cart, item]);
-  }
-};
-
-
+  const addToCart = (item) => {
+    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+    const itemQuantity = item.quantity ?? 1; 
+  
+    if (existingItem) {
+      setCart(
+        cart.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + itemQuantity }
+            : cartItem
+        )
+      );
+    } else {
+      setCart([...cart, { ...item, quantity: itemQuantity }]);
+    }
+  };
+  
   // Remove item from cart
   const removeFromCart = (id) => {
     setCart(cart.filter((cartItem) => cartItem.id !== id));
