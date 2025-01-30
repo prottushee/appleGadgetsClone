@@ -4,11 +4,13 @@ import { BiSearch } from "react-icons/bi";
 import { CartContext } from "../context/CartContext";
 import { menuItems } from "../Data";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import  AccountModal  from "./AccountModal";
 import {
   faBars,
   faChevronRight,
   faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
+
 
 const NavigationBar = () => {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
@@ -19,6 +21,7 @@ const NavigationBar = () => {
   const [expandedSubMenu, setExpandedSubMenu] = useState(null);
   const { getTotalItemCount } = useContext(CartContext);
   const totalItems = getTotalItemCount();
+  const [showModal, setShowModal] = useState(false);
 
   const handleMouseEnter = (e, index) => {
     if (window.innerWidth > 992) {
@@ -133,7 +136,7 @@ const NavigationBar = () => {
                 <div className="col-lg-7 mx-auto d-flex justify-content-end gap-3">
                   <div>
                     <Link
-                      to="/offer"
+                      to="/offers"
                       className="nav-link d-flex align-items-center text-white"
                     >
                       <img
@@ -171,7 +174,7 @@ const NavigationBar = () => {
                   </div>
                   <div>
                     <Link
-                      to="/pre-order"
+                      to="/preorder"
                       className="nav-link d-flex align-items-center text-white"
                     >
                       <img
@@ -189,7 +192,7 @@ const NavigationBar = () => {
                   </div>
                   <div>
                     <Link
-                      to="/account"
+                      onClick={()=>setShowModal(true)}
                       className="nav-link d-flex align-items-center text-white me-4"
                     >
                       <img
@@ -313,7 +316,7 @@ const NavigationBar = () => {
           <div className="row justify-content-around">
             <div className="col-3 text-center">
               <Link
-                to="/offer"
+                to="/offers"
                 className="nav-link text-white d-flex flex-column align-items-center"
               >
                 <img
@@ -345,7 +348,7 @@ const NavigationBar = () => {
             </div>
             <div className="col-3 text-center">
               <Link
-                to="/pre-order"
+                to="/preorder"
                 className="nav-link text-white d-flex flex-column align-items-center"
               >
                 <img
@@ -361,7 +364,7 @@ const NavigationBar = () => {
             </div>
             <div className="col-3 text-center">
               <Link
-                to="/account"
+                onClick={()=>setShowModal(true)}
                 className="nav-link text-white d-flex flex-column align-items-center"
               >
                 <img
@@ -378,6 +381,8 @@ const NavigationBar = () => {
           </div>
         </div>
       </div>
+
+      <AccountModal show={showModal} handleClose={() => setShowModal(false)} />
     </>
   );
 };

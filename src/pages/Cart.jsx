@@ -17,7 +17,9 @@ const ShoppingCart = () => {
   const handleDecrease = (id) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, item.quantity - 1) } : item
+        item.id === id
+          ? { ...item, quantity: Math.max(1, item.quantity - 1) }
+          : item
       )
     );
   };
@@ -26,13 +28,19 @@ const ShoppingCart = () => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
-  const subTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subTotal = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   return (
-    <div className="container bg-light shadow-sm rounded px-5" style={{marginTop: "10%"}}>
+    <div
+      className="container bg-light shadow-sm rounded px-5"
+      style={{ marginTop: "10%" }}
+    >
       {isCartEmpty ? (
         <div className="text-center">
-          <div className="d-flex justify-content-center" >
+          <div className="d-flex justify-content-center">
             <img
               className="img-fluid"
               src="/images/emptyCart.png"
@@ -54,10 +62,12 @@ const ShoppingCart = () => {
         <>
           <h3 className="text-start mb-4">Shopping Cart</h3>
 
-        
           <div className="table-responsive">
             <table className="table table-bordered border-white">
-              <thead className="table-secondary text-start" style={{fontSize: "90%"}}>
+              <thead
+                className="table-secondary text-start"
+                style={{ fontSize: "90%" }}
+              >
                 <tr>
                   <th>Image</th>
                   <th>Product Name</th>
@@ -67,7 +77,7 @@ const ShoppingCart = () => {
                   <th className="d-none d-md-table-cell">Actions</th>
                 </tr>
               </thead>
-              <tbody className="text-start" style={{fontSize: "85%"}}>
+              <tbody className="text-start" style={{ fontSize: "85%" }}>
                 {cart.map((item) => (
                   <tr key={item.id} className="text-start align-middle">
                     <td>
@@ -88,7 +98,9 @@ const ShoppingCart = () => {
                         >
                           -
                         </button>
-                        <span className="px-2 border border-secondary">{item.quantity}</span>
+                        <span className="px-2 border border-secondary">
+                          {item.quantity}
+                        </span>
                         <button
                           className="btn btn-outline-secondary py-0"
                           onClick={() => handleIncrease(item.id)}
@@ -100,13 +112,20 @@ const ShoppingCart = () => {
                     <td className="d-none d-md-table-cell">
                       {item.price.toLocaleString()}
                     </td>
-                    <td  className="text-left no-wrap">{(item.price * item.quantity).toLocaleString()}
-                    <button className="btn d-md-none" onClick={() => handleRemove(item.id)}>
+                    <td className="text-left no-wrap">
+                      {(item.price * item.quantity).toLocaleString()}
+                      <button
+                        className="btn d-md-none"
+                        onClick={() => handleRemove(item.id)}
+                      >
                         <i className="bi bi-trash"></i>
                       </button>
                     </td>
                     <td>
-                      <button className="btn d-none d-md-table-cell" onClick={() => handleRemove(item.id)}>
+                      <button
+                        className="btn d-none d-md-table-cell"
+                        onClick={() => handleRemove(item.id)}
+                      >
                         <i className="bi bi-trash"></i>
                       </button>
                     </td>
@@ -116,27 +135,40 @@ const ShoppingCart = () => {
             </table>
           </div>
 
-          
           <div className="row mt-4">
             <div className="col-12 col-md-6 d-flex justify-content-between align-items-end">
-              <Link to="/" className="btn btn-orange btn-sm text-white w-40 p-2">
+              <Link
+                to="/"
+                className="btn btn-orange btn-sm text-white w-40 p-2"
+              >
                 Continue Shopping
               </Link>
             </div>
             <div className="col-12 col-md-6 text-end">
               <p>
-                <strong>Sub-Total:</strong> <span className="text-orange">BDT {subTotal.toLocaleString()}</span>
+                <strong>Sub-Total:</strong>{" "}
+                <span className="text-orange">
+                  BDT {subTotal.toLocaleString()}
+                </span>
               </p>
               <p>
-                <strong>Delivery Charge:</strong> <span className="text-orange">(will be added)</span>
+                <strong>Delivery Charge:</strong>{" "}
+                <span className="text-orange">(will be added)</span>
               </p>
               <p>
-                <strong>Total Discount:</strong> <span className="text-orange"> 0</span>
+                <strong>Total Discount:</strong>{" "}
+                <span className="text-orange"> 0</span>
               </p>
               <p>
-                <strong>Total:</strong> <span className="text-orange">BDT {subTotal.toLocaleString()}</span>
+                <strong>Total:</strong>{" "}
+                <span className="text-orange">
+                  BDT {subTotal.toLocaleString()}
+                </span>
               </p>
-              <Link to="/checkout" className="btn btn-orange btn-sm text-white w-40 p-2">
+              <Link
+                to="/checkout"
+                className="btn btn-orange btn-sm text-white w-40 p-2"
+              >
                 Checkout
               </Link>
             </div>

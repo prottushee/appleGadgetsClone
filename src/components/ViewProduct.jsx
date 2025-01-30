@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { colorOptions } from "../Data";
 import Container from "./Container";
 import BreadCrumb from "./BreadCrumb";
@@ -15,8 +15,13 @@ const ViewProduct = () => {
   );
   const [quantity, setQuantity] = useState(1);
   const [isAdded, setIsAdded] = useState(false);
-
   
+  useEffect(() => {
+    if (window.bootstrap && window.bootstrap.Tooltip) {
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+      tooltipTriggerList.forEach((tooltip) => new window.bootstrap.Tooltip(tooltip));
+    }
+  }, []);
   const handleQuantityChange = (action) => {
     setQuantity((prevQuantity) => {
       if (action === "increase") return prevQuantity + 1;
@@ -78,7 +83,8 @@ const ViewProduct = () => {
                       height: "70px",
                       cursor: "pointer",
                       objectFit: "cover",
-                      borderWidth: selectedImage === color.image ? "2px" : "1px",
+                      borderWidth:
+                        selectedImage === color.image ? "2px" : "1px",
                     }}
                     onClick={() => {
                       setSelectedImage(color.image);
@@ -93,7 +99,11 @@ const ViewProduct = () => {
           {/* Product Details Section */}
           <div className="col-md-6">
             <a href="#">
-              <img src="/images/sotoApple-6176.png" alt="Apple Logo" width="12%" />
+              <img
+                src="/images/sotoApple-6176.png"
+                alt="Apple Logo"
+                width="12%"
+              />
             </a>
             <h2 className="d-none d-lg-block">iPhone 16 Pro Max</h2>
             <p className="text-muted">Brand: Apple</p>
@@ -125,17 +135,19 @@ const ViewProduct = () => {
                         : "btn-outline-secondary"
                     }`}
                     style={{
-                      width: "6%",
-                      height: "8%",
+                      width: "8px",
                       backgroundColor: color.hex,
                       color: selectedColor === color.name ? "white" : "black",
-                      padding: "5px 10px",
+                      padding: "10px 10px",
+                      borderRadius: 0,
                     }}
                     onClick={() => {
                       setSelectedImage(color.image);
                     }}
-                  >
-                  </button>
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title={color.name} 
+                  ></button>
                 ))}
               </div>
             </div>
@@ -164,10 +176,12 @@ const ViewProduct = () => {
             <div className="mt-4 d-flex flex-column flex-sm-row">
               <button
                 className={`btn me-2 mb-2 mb-sm-0 ${
-                  isAdded ? "btn-success text-white" : "btn-outline-orange text-orange"
+                  isAdded
+                    ? "btn-success text-white"
+                    : "btn-outline-orange text-orange"
                 }`}
                 onClick={handleAddToCart}
-                disabled={isAdded} 
+                disabled={isAdded}
               >
                 {isAdded ? "Added" : "Add to Cart"}
               </button>

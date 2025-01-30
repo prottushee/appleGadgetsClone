@@ -9,11 +9,11 @@ body {
 
 .nav-link {
   text-decoration: none !important;
-  color: black; /* Default text color */
-  transition: color 0.3s ease-in-out; /* Smooth transition */
+  color: black; 
+  transition: color 0.3s ease-in-out; 
 }
 
-/* Change color to orange on hover */
+
 .nav-link:hover,
 .nav-link.dropdown-toggle:hover {
   color: darkorange !important;
@@ -87,6 +87,15 @@ a.hover:hover{
   color: darkorange; 
 }
 
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); 
+  z-index: 1040; 
+}
 
 
 @media (min-width: 992px) {

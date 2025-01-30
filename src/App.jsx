@@ -4,14 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import RootLayout from "./pages/RootLayout";  
-import Home from "./pages/Home";     
-import Login from "./pages/Login";  
+import Home from "./pages/Home";       
 import Cart from "./pages/Cart"
-// import ForgotPassword from "./pages/ForgotPassword";  
-// import Signup from "./pages/Signup"; 
 import SingleProduct from "./pages/SingleProduct";  
 import NotFound from "./pages/NotFound";  
 import { ToastContainer } from "react-toastify";
+import PreOrderForm from "./pages/PreOrderForm";
+import OffersPage from "./pages/Offers";
 // import Checkout from "./pages/Checkout";  
 const router = createBrowserRouter([
   {
@@ -21,10 +20,8 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "/product/:slug", element: <SingleProduct /> },
       {path: "/cart", element: <Cart />},
-      // { path: "/checkout", element: <Checkout /> },
-      { path: "/login", element: <Login /> },
-      // { path: "/signup", element: <Signup /> },
-      // { path: "/forgot-password", element: <ForgotPassword /> },
+      { path: "/offers", element: <OffersPage /> },
+      { path: "/preorder", element: <PreOrderForm /> },
       { path: "*", element: <NotFound /> },  
     ],
   },
