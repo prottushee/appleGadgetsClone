@@ -11,7 +11,7 @@ import NotFound from "./pages/NotFound";
 import { ToastContainer } from "react-toastify";
 import PreOrderForm from "./pages/PreOrderForm";
 import OffersPage from "./pages/Offers";
-// import Checkout from "./pages/Checkout";  
+import Checkout from "./pages/Checkout";  
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +21,7 @@ const router = createBrowserRouter([
       { path: "/product/:slug", element: <SingleProduct /> },
       {path: "/cart", element: <Cart />},
       { path: "/offers", element: <OffersPage /> },
+      { path: "/checkout", element: <Checkout /> },
       { path: "/preorder", element: <PreOrderForm /> },
       { path: "*", element: <NotFound /> },  
     ],
